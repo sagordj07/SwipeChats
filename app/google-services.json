@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "499252738789",
+    "firebase_url": "https://swipechats-39c44.firebaseio.com",
+    "project_id": "swipechats-39c44",
+    "storage_bucket": "swipechats-39c44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499252738789:android:8b9a89b22e8a886d",
+        "android_client_info": {
+          "package_name": "com.messengers.swipechat.swipechats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499252738789-et8i2l1f70kl983lvtj4cjs7ivuvh672.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.messengers.swipechat.swipechats",
+            "certificate_hash": "2a21df2d9c223358862fbb1a51b6bee1e80726be"
+          }
+        },
+        {
+          "client_id": "499252738789-6tiddh09bg3d1352neth39jfu2be1078.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxxwqYIsLfXx7N6i6DZQ5wDVwRCKCiSLc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499252738789-6tiddh09bg3d1352neth39jfu2be1078.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

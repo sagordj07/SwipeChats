@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SwipeChats</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Chat_fragment">Hello Chat fragment</string>
+    <string name="Contacts_fragment">Hello contracts fragment</string>
+    <string name="Group_fragment">Hello Group fragment</string>
+</resources>
