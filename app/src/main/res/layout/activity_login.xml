@@ -95,7 +95,7 @@
             android:inputType="textEmailAddress"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/login_Button_id"
-            android:text="Need new account?"
+            android:text="Create new account?"
             android:padding="5dp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
@@ -113,7 +113,7 @@
             android:inputType="textEmailAddress"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/new_account_id_link"
-            android:text="or Login Using"
+            android:text="or Login"
             android:padding="5dp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
@@ -130,6 +130,8 @@
             android:padding="10dp"
             android:background="@drawable/buttons"
             android:layout_below="@+id/login_using"/>
+
+
          </RelativeLayout>
 
     </ScrollView>

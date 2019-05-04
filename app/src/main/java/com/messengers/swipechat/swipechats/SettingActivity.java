@@ -62,6 +62,7 @@ public class SettingActivity extends AppCompatActivity {
     private void RetrieveUserInfo() {
 
 
+
         Rootref.child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

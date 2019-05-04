@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "499252738789-59k07j4mdm9p2acms5a050n8d9h1hshm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.messengers.swipechat.swipechats",
+            "certificate_hash": "cfebb7c50113bc1f4e9b047ad3319523bb5a47ff"
+          }
+        },
+        {
           "client_id": "499252738789-6tiddh09bg3d1352neth39jfu2be1078.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -33,20 +41,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "499252738789-6tiddh09bg3d1352neth39jfu2be1078.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
