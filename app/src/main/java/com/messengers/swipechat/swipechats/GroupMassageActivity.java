@@ -52,7 +52,6 @@ public class GroupMassageActivity extends AppCompatActivity {
         GroupNameRef=FirebaseDatabase.getInstance().getReference().child("Groups").child(currentgroupName);
 
 
-
         initialized();
         GetUserDetails();
 
@@ -163,7 +162,7 @@ public class GroupMassageActivity extends AppCompatActivity {
             massagetextdisplay.append(massagename+"\n");
             massagetextdisplay.append(maassage+"\n");
             massagetextdisplay.append(massageTime+"\n");
-            massagetextdisplay.append(massgdate+"\n");
+            massagetextdisplay.append(massgdate+"\n\n\n");
 
 
 
