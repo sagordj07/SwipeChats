@@ -61,6 +61,8 @@ public class GroupMassageActivity extends AppCompatActivity {
                 saveMassage();
 
                 usermassgageinput.setText("");
+                mScrolView.fullScroll(ScrollView.FOCUS_DOWN);
+
             }
         });
 
@@ -159,10 +161,10 @@ public class GroupMassageActivity extends AppCompatActivity {
             String maassage=(String)((DataSnapshot)iterator.next()).getValue();
             String massagename=(String)((DataSnapshot)iterator.next()).getValue();
 
-            massagetextdisplay.append(massagename+"\n");
+            massagetextdisplay.append(massagename+":\n");
             massagetextdisplay.append(maassage+"\n");
-            massagetextdisplay.append(massageTime+"\n");
-            massagetextdisplay.append(massgdate+"\n\n\n");
+            massagetextdisplay.append(massageTime+" ");
+            massagetextdisplay.append(massgdate+"\n\n");
 
 
 
@@ -204,6 +206,7 @@ public class GroupMassageActivity extends AppCompatActivity {
 
         massagetextdisplay=(TextView)findViewById(R.id.group_massge_display);
 
+        mScrolView.fullScroll(ScrollView.FOCUS_DOWN);
 
 
 
