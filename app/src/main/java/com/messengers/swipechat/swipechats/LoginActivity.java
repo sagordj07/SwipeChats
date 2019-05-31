@@ -57,6 +57,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        phoneLoginbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent phonLoginIntent=new Intent(LoginActivity.this,PhoneLogActivity.class);
+                startActivity(phonLoginIntent);
+            }
+        });
+
 
     }
 
