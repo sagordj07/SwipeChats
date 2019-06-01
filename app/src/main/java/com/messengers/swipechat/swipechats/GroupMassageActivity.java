@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -190,8 +191,13 @@ public class GroupMassageActivity extends AppCompatActivity {
             }
         });
 
+    }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.groupmessage,menu );
+        return true;
     }
 
     private void initialized() {
@@ -211,5 +217,6 @@ public class GroupMassageActivity extends AppCompatActivity {
 
 
     }
+
 }
 

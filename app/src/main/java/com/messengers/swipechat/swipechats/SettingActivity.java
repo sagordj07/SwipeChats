@@ -1,7 +1,9 @@
 package com.messengers.swipechat.swipechats;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +20,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
 
@@ -33,6 +41,10 @@ public class SettingActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference Rootref;
 
+    private StorageReference userProfileImagaeRef;
+
+    private static final int gallerypic=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +54,7 @@ public class SettingActivity extends AppCompatActivity {
         currentUserId=mAuth.getCurrentUser().getUid();
 
         Rootref=FirebaseDatabase.getInstance().getReference();
+        userProfileImagaeRef= FirebaseStorage.getInstance().getReference().child("Profile");
 
 
         InitializeFields();
@@ -56,14 +69,26 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         RetrieveUserInfo();
+
+        userProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent GallaryIntent=new Intent();
+                GallaryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                GallaryIntent.setType("image/**");
+                startActivityForResult(GallaryIntent,gallerypic);
+
+            }
+        });
     }
 
 
     private void RetrieveUserInfo() {
 
 
-
-        Rootref.child("Users").child(currentUserId).addValueEventListener(new ValueEventListener() {
+        Rootref.child("Users").child(currentUserId)
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -75,6 +100,8 @@ public class SettingActivity extends AppCompatActivity {
 
                     userName.setText(RetrieveUsername);
                     userStatus.setText(RetrievStatus);
+
+                    Picasso.get().load(RetrieveImage).into(userProfileImage);
 
 
                 }
@@ -118,6 +145,81 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==gallerypic && resultCode==RESULT_OK && data!=null)
+        {
+            Uri imageUri=data.getData();
+
+            CropImage.activity()
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setAspectRatio(1,1)
+                    .start(this);
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if(resultCode == RESULT_OK)
+            {
+                Uri resultUri=result.getUri();
+
+                StorageReference FilePath=userProfileImagaeRef.child(currentUserId + ".jpg");
+
+                FilePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(SettingActivity.this,"profile image set Succesfully",Toast.LENGTH_LONG).show();
+
+                           String downloaedUrl = task.getResult().getDownloadUrl().toString();
+
+                            Rootref.child("Users").child(currentUserId).child("image")
+                                    .setValue(downloaedUrl)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful())
+                                            {
+                                                Toast.makeText(SettingActivity.this,"profile image saved ",Toast.LENGTH_LONG).show();
+
+                                            }
+                                            else
+                                            {
+                                                String error=task.getException().toString();
+                                                Toast.makeText(SettingActivity.this,error,Toast.LENGTH_LONG).show();
+
+                                            }
+                                        }
+                                    });
+
+
+
+                        }
+                        else
+                        {
+                            String error=task.getException().toString();
+
+
+                            Toast.makeText(SettingActivity.this,"Error:" +error,Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+            }
+        }
+    }
+
+
+
     private void updateSetting() {
 
         String SetUsername= userName.getText().toString();
@@ -133,6 +235,8 @@ public class SettingActivity extends AppCompatActivity {
             profileMap.put("uId",currentUserId);
             profileMap.put("name",SetUsername);
             profileMap.put("status",setUserStatus);
+
+
             Rootref.child("Users").child(currentUserId).setValue(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -141,6 +245,7 @@ public class SettingActivity extends AppCompatActivity {
 
                         SendUserToMainActivity();
                         Toast.makeText(SettingActivity.this,"profile Update is successfuly",Toast.LENGTH_SHORT).show();
+
 
                     }
                     else
@@ -155,8 +260,8 @@ public class SettingActivity extends AppCompatActivity {
 
         }
 
-
     }
+
     private void SendUserToMainActivity() {
 
         Intent mainIntet=new Intent(SettingActivity.this,MainActivity.class);
