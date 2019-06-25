@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         mtoolbar=(Toolbar)findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mtoolbar);
-        getSupportActionBar().setTitle("SwipeChats");
+        getSupportActionBar().setTitle("SwipeChat");
 
 
         myviewPager=(ViewPager)findViewById(R.id.main_tbs_pager);
@@ -119,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+
+    private void sendUserToFindFriendsActivity() {
+
+        Intent findfriendIntent=new Intent(MainActivity.this,FindFriendsActivity.class);
+        startActivity(findfriendIntent);
+        finish();
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
          super.onCreateOptionsMenu(menu);
@@ -156,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(item.getItemId()==R.id.find_friend_id)
         {
-
+            sendUserToFindFriendsActivity();
 
         }
 
