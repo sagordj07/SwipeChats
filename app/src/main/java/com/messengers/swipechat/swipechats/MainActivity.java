@@ -155,6 +155,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+        if(item.getItemId()==R.id.about_id)
+        {
+            sendToAboutActivity();
+
+
+        }
 
         if(item.getItemId()==R.id.Group_option_id)
 {
@@ -171,6 +177,15 @@ public class MainActivity extends AppCompatActivity {
 
 
          return  true;
+    }
+
+    private void sendToAboutActivity() {
+
+        Intent aboutIntent = new Intent(MainActivity.this,AboutActivity.class);
+
+        aboutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(aboutIntent);
+
     }
 
     private void RequestCreatNewGroup() {
