@@ -98,7 +98,6 @@ public class FindFriendsActivity extends AppCompatActivity {
     }
 
 
-
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder
     {
         TextView userName, userStatus;

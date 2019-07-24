@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void CreateNewGroup(final String groupName) {
 
         RootRef.child("Groups").child(groupName).setValue("")
